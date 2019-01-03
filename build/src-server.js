@@ -1,9 +1,21 @@
-var express = require('express');
-var path = require('path');
-var open = require('open');
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
 
-var port = 3000;
-var app = express();
+import config from '../webpack.config.dev';
+
+const compiler = webpack(config);
+const middleware = webpackMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+});
+
+const port = 3000;
+const app = express();
+
+app.use(middleware);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../src/index.html'));
