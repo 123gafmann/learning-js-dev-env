@@ -6,6 +6,8 @@ import webpackMiddleware from 'webpack-dev-middleware';
 
 import config from '../webpack.config.dev';
 
+/* eslint-disable no-console */
+
 const compiler = webpack(config);
 const middleware = webpackMiddleware(compiler, {
     noInfo: true,
